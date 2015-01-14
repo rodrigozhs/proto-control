@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=2.0" >
+	<title>Protótico Control</title>
+	
+	<!-- css -->
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="components/bootstrap-material-design/dist/css/material-wfont.min.css">
+	<link rel="stylesheet" href="components/bootstrap-material-design/dist/css/ripples.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body ng-app="controlApp">
+	
+	<!-- Navbar -->
+	<div class="navbar navbar-default" ng-controller="NavbarController as navbar">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="javascript:void(0)">{{getName()}}</a>
+		</div>
+		<div class="navbar-collapse collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="javascript:void(0)" ng-click="setName('Tarefas')">Tarefas</a></li>
+			</ul>
+			<form class="navbar-form navbar-left">
+				<input type="text" class="form-control col-lg-8" placeholder="Search" ng-model="query"> 
+			</form>
+
+		</div>
+	</div>
+
+
+	<div class="container" ng-controller="TarefasController">
+
+		<div class="row search-tasks">
+			<div class="col-xs-12">
+				<input type="text" class="form-control" placeholder="{{getTotalTarefas()}} tasks to search" ng-model='q'>
+			</div>
+		</div>
+
+		<div ng-repeat="tarefa in tarefas | filter:q as results">		
+			<!-- Tarefa mais importante -->
+			<div class="panel">
+				<div class="panel-body">
+					<div>
+						<span class="move-task l"><i class="mdi-editor-vertical-align-center"></i></span>
+						<div class="l pt15 ml20">{{tarefa.titulo}}</div>
+						<small class="pull-right">{{tarefa.created}}</small>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!-- JS -->
+	<script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="components/angular/angular.min.js"></script> 
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="components/bootstrap-material-design/dist/js/ripples.min.js"></script>
+	<script src="components/bootstrap-material-design/dist/js/material.min.js"></script>
+	
+	<!-- JS APP -->
+	<script src="app.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$.material.init();
+		});
+	</script>
+</body>
+</html>
